@@ -17,13 +17,13 @@ body {
 #card {
   margin: 3em auto;
   flex-direction: column;
-  max-width: 720px;
+  max-width: 600px;
   max-height: 0px;
   border-radius: 6px;
   overflow: inherit;
   color: #000000;
   padding-bottom: 500px;
-  height: 720px;
+  height: 600px;
   transform: translateY(50px);
 
 }
