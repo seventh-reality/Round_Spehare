@@ -1,66 +1,99 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Electric Bed</title>
-    <meta charset="utf-8">
-    <meta name="description" content="&lt;model-viewer&gt; template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/css" href="./styles.css" rel="stylesheet"/>
-     <script src="https://cdn.jsdelivr.net/npm/focus-visible@5.0.2/dist/focus-visible.js" defer></script>
-    <link rel="stylesheet" href="css/font-icons.css" type="text/css" />
-    <link rel="stylesheet" href="css/font-icons.css" type="text/css" />
-  </head>
-  <body>
-    <div id="card">
-    <!-- <model-viewer> HTML element -->
-    <model-viewer src="Round.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls poster="loading.gif"  shadow-intensity="0.88" shadow-softness="1" environment-image="aircraft_workshop_01_1k.hdr" autoplay exposure="1">
+<head>
+  <title>Electric Bed</title>
+  <meta charset="utf-8">
+  <meta name="description" content="<model-viewer> template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="css/font-icons.css" />
+  <script src="https://cdn.jsdelivr.net/npm/focus-visible@5.0.2/dist/focus-visible.js" defer></script>
+
+  <!-- Black background and layout -->
+  <style>
+    body {
+      background-color: black;
+      margin: 0;
+      padding: 0;
+    }
+    #card {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    model-viewer {
+      width: 100%;
+      height: 100vh;
+      background-color: black;
+    }
+    #ar-button {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 20px;
+      background: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #ar-prompt {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="card">
+    <!-- <model-viewer> element -->
+    <model-viewer
+      id="model"
+      src="Round.glb"
+      ar
+      ar-modes="webxr scene-viewer quick-look"
+      camera-controls
+      poster="loading.gif"
+      shadow-intensity="0.88"
+      shadow-softness="1"
+      environment-image="aircraft_workshop_01_1k.hdr"
+      autoplay
+      exposure="1">
+      
       <div class="progress-bar hide" slot="progress-bar">
-          <div class="update-bar"></div>
+        <div class="update-bar"></div>
       </div>
-      <button slot="ar-button" id="ar-button">
-        View in 4D
-    </button>
-        
-       
-      <script>
-const myTimeout = setTimeout(myGreeting, 10000);
 
-function myGreeting() {
-  document.getElementById("button1").innerHTML = ""
-}
+      <button slot="ar-button" id="ar-button">View in 4D</button>
 
-</script>
-     
       <div id="ar-prompt">
-          <img src="ar_hand_prompt.png">
+        <img src="ar_hand_prompt.png" alt="AR Prompt">
       </div>
-    </model-viewer> 
-       </div>
-   <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+    </model-viewer>
+  </div>
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyB9Q0rEJwgpUForSuU-Deub86dEErxr6xw",
-    authDomain: "varian-aarhus-7468b.firebaseapp.com",
-    projectId: "varian-aarhus-7468b",
-    storageBucket: "varian-aarhus-7468b.appspot.com",
-    messagingSenderId: "1062779231273",
-    appId: "1:1062779231273:web:d5cdc6e2eb57d740dd1038",
-    measurementId: "G-X2PCG842TC"
-  };
+  <!-- Force animation to play if needed -->
+  <script>
+    const modelViewer = document.querySelector('model-viewer');
+    modelViewer.addEventListener('load', () => {
+      // Log available animations
+      console.log('Available animations:', modelViewer.availableAnimations);
+      
+      // Explicitly play if autoplay doesn't trigger
+      modelViewer.play();
+    });
+  </script>
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
-    <script src="script.js"></script>
-    <!-- Loads <model-viewer> for browsers: -->
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
-  </body>
+
+  <!-- Optional extra script -->
+  <script src="script.js"></script>
+
+  <!-- Load model-viewer -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
+</body>
 </html>
